@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Unemployment Rate in Malaysia (2022)",
+  "title": "Unemployment Rate in Malaysia (1982-2022)",
   "width": 1000,
   "height": 600,
   "projection": { "type": "equirectangular" },
