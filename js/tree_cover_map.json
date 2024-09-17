@@ -17,7 +17,7 @@
   "layer": [
     {
       "data": {
-        "url": "path/to/malaysia_states.json",
+        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_ocean"
@@ -32,7 +32,7 @@
     },
     {
       "data": {
-        "url": "path/to/malaysia_states.json",
+        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_graticules_5"
@@ -46,7 +46,7 @@
     },
     {
       "data": {
-        "url": "path/to/malaysia_states.json",
+        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_admin_0_countries"
@@ -61,7 +61,7 @@
     },
     {
       "data": {
-        "url": "path/to/malaysia_states.json",
+        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
         "format": { "type": "topojson", "feature": "gadm41_MYS_1" }
       },
       "transform": [
@@ -73,7 +73,7 @@
           "lookup": "state_name",
           "from": {
             "data": {
-              "url": "path/to/Cleaned_Unemployment_Rate_Data.csv",
+              "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/Cleaned_Unemployment_Rate_Data.csv",
               "format": { "type": "csv" },
               "transform": [
                 { "filter": "datum.date == '2022-01-01'" }
