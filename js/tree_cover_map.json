@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Unemployment Rate in Malaysia (2022 tesitng)",
+  "title": "Unemployment Rate in Malaysia (1982-2022)",
   "width": 1000,
   "height": 600,
   "projection": { "type": "equirectangular" },
@@ -74,16 +74,15 @@
           "from": {
             "data": {
               "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/Cleaned_Unemployment_Rate_Data.csv",
-              "format": { "type": "csv" },
-              "transform": [
-                { "filter": "datum.date == '2022-01-01'" }
-              ]
+              "format": { "type": "csv" }
             },
             "key": "state",
-            "fields": ["u_rate"]
+            "fields": ["date", "u_rate"]
           }
         },
-        { "calculate": "datum.u_rate", "as": "Unemployment Rate (%)" }
+        {
+          "filter": "year(datum.date) == selectedYear"
+        }
       ],
       "mark": {
         "type": "geoshape",
@@ -92,19 +91,19 @@
       },
       "encoding": {
         "color": {
-          "field": "Unemployment Rate (%)",
+          "field": "u_rate",
           "type": "quantitative",
+          "title": "Unemployment Rate (%)",
           "scale": {
-            "type": "quantize",
             "scheme": "blues",
-            "domain": [1, 8],
+            "domain": [1, 10],
             "reverse": false
           }
         },
         "tooltip": [
           { "field": "state_name", "type": "nominal", "title": "State" },
           {
-            "field": "Unemployment Rate (%)",
+            "field": "u_rate",
             "type": "quantitative",
             "title": "Unemployment Rate (%)",
             "format": ".1f"
@@ -114,3 +113,6 @@
     }
   ]
 }
+
+// "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
+// "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/Cleaned_Unemployment_Rate_Data.csv",
