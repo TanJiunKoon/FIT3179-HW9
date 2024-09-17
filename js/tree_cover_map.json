@@ -74,16 +74,15 @@
           "from": {
             "data": {
               "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/Cleaned_Unemployment_Rate_Data.csv",
-              "format": { "type": "csv" },
-              "transform": [
-                { "filter": "datum.date == '2022-01-01'" }
-              ]
+              "format": { "type": "csv" }
             },
             "key": "state",
-            "fields": ["u_rate"]
+            "fields": ["date", "u_rate"]
           }
         },
-        { "calculate": "datum.u_rate", "as": "Unemployment Rate (%)" }
+        {
+          "filter": "year(datum.date) == selectedYear"
+        }
       ],
       "mark": {
         "type": "geoshape",
@@ -92,19 +91,19 @@
       },
       "encoding": {
         "color": {
-          "field": "Unemployment Rate (%)",
+          "field": "u_rate",
           "type": "quantitative",
+          "title": "Unemployment Rate (%)",
           "scale": {
-            "type": "quantize",
             "scheme": "blues",
-            "domain": [1, 8],
+            "domain": [1, 10],
             "reverse": false
           }
         },
         "tooltip": [
           { "field": "state_name", "type": "nominal", "title": "State" },
           {
-            "field": "Unemployment Rate (%)",
+            "field": "u_rate",
             "type": "quantitative",
             "title": "Unemployment Rate (%)",
             "format": ".1f"
