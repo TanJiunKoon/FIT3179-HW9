@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Net change in tree cover in Malaysia (2001-2022)",
+  "title": "Unemployment Rate in Malaysia (2022)",
   "width": 1000,
   "height": 600,
   "projection": { "type": "equirectangular" },
@@ -17,7 +17,7 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
+        "url": "path/to/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_ocean"
@@ -32,7 +32,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
+        "url": "path/to/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_graticules_5"
@@ -46,7 +46,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
+        "url": "path/to/malaysia_states.json",
         "format": {
           "type": "topojson",
           "feature": "ne_50m_admin_0_countries"
@@ -61,21 +61,29 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/malaysia_states.json",
+        "url": "path/to/malaysia_states.json",
         "format": { "type": "topojson", "feature": "gadm41_MYS_1" }
       },
       "transform": [
         {
-          "lookup": "properties.NAME_1",
+          "calculate": "datum.properties.NAME_1 == 'Penang' ? 'Pulau Pinang' : datum.properties.NAME_1 == 'Kuala Lumpur' ? 'W.P. Kuala Lumpur' : datum.properties.NAME_1 == 'Labuan' ? 'W.P. Labuan' : datum.properties.NAME_1 == 'Putrajaya' ? 'W.P. Putrajaya' : datum.properties.NAME_1",
+          "as": "state_name"
+        },
+        {
+          "lookup": "state_name",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/Country_carbon_data.csv"
+              "url": "path/to/Cleaned_Unemployment_Rate_Data.csv",
+              "format": { "type": "csv" },
+              "transform": [
+                { "filter": "datum.date == '2022-01-01'" }
+              ]
             },
-            "key": "subnational1",
-            "fields": ["change2"]
+            "key": "state",
+            "fields": ["u_rate"]
           }
         },
-        { "calculate": "datum.change2", "as": "Tree Cover Loss (%)" }
+        { "calculate": "datum.u_rate", "as": "Unemployment Rate (%)" }
       ],
       "mark": {
         "type": "geoshape",
@@ -84,78 +92,25 @@
       },
       "encoding": {
         "color": {
-          "field": "Tree Cover Loss (%)",
+          "field": "Unemployment Rate (%)",
           "type": "quantitative",
           "scale": {
-            "type": "threshold",
-            "scheme": "redblue",
-            "reverse": true,
-            "range": ["#b9413d", "#d45f52", "#ea9178", "#f9d0bb", "#939bc7"],
-            "domain": [0, 10, 20, 30],
-            "zero": true
+            "type": "quantize",
+            "scheme": "blues",
+            "domain": [1, 8],
+            "reverse": false
           }
         },
         "tooltip": [
-          { "field": "properties.NAME_1", "type": "nominal", "title": "State" },
+          { "field": "state_name", "type": "nominal", "title": "State" },
           {
-            "field": "Tree Cover Loss (%)",
+            "field": "Unemployment Rate (%)",
             "type": "quantitative",
-            "title": "Tree cover loss (%)"
+            "title": "Unemployment Rate (%)",
+            "format": ".1f"
           }
         ]
       }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/main/data/tcm_annotations.csv"
-      },
-      "encoding": {
-        "longitude": { "field": "Longitude", "type": "quantitative" },
-        "latitude": { "field": "Latitude", "type": "quantitative" }
-      },
-      "layer": [
-        {
-          "layer": [
-            {
-              "mark": {
-                "type": "point",
-                "size": 600,
-                "shape": "arrow",
-                "color": "#040404",
-                "dy": -100,
-                "strokeWidth": 2,
-                "fill": "#000000"
-              }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": -120,
-                "dy": 25,
-                "fontStyle": "italic",
-                "fontWeight": "bold",
-                "fontSize": 12,
-                "color": "#040404"
-              },
-              "encoding": { "text": { "field": "text_annotation" } }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": -120,
-                "dy": 45,
-                "fontStyle": "italic",
-                "fontWeight": "bold",
-                "fontSize": 12,
-                "color": "#040404"
-              },
-              "encoding": { "text": { "field": "text_annotation2" } }
-            }
-          ]
-        }
-      ]
     }
   ]
 }
