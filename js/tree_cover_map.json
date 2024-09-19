@@ -114,7 +114,7 @@
     }, 
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/brightcosmo/FIT3179-Assignment2/main/data/tcm_annotations.csv"
+        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/refs/heads/main/data/tcm_annotations.csv"
       },
       "encoding": {
         "longitude": { "field": "Longitude", "type": "quantitative" },
