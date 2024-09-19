@@ -111,58 +111,6 @@
           }
         ]
       }
-    }, 
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/TanJiunKoon/FIT3179-HW9/refs/heads/main/data/tcm_annotations.csv"
-      },
-      "encoding": {
-        "longitude": { "field": "Longitude", "type": "quantitative" },
-        "latitude": { "field": "Latitude", "type": "quantitative" }
-      },
-      "layer": [
-        {
-          "layer": [
-            {
-              "mark": {
-                "type": "point",
-                "size": 600,
-                "shape": "arrow",
-                "color": "#040404",
-                "dy": -100,
-                "strokeWidth": 2,
-                "fill": "#000000"
-              }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": -120,
-                "dy": 25,
-                "fontStyle": "italic",
-                "fontWeight": "bold",
-                "fontSize": 12,
-                "color": "#040404"
-              },
-              "encoding": { "text": { "field": "text_annotation" } }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": -120,
-                "dy": 45,
-                "fontStyle": "italic",
-                "fontWeight": "bold",
-                "fontSize": 12,
-                "color": "#040404"
-              },
-              "encoding": { "text": { "field": "text_annotation2" } }
-            }
-          ]
-        }
-      ]
     }
   ]
 }
